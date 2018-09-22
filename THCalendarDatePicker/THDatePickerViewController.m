@@ -370,12 +370,10 @@
     if(!self.weekdaysView.subviews.count) {
         CGSize fullSize = self.weekdaysView.frame.size;
         int curX = (fullSize.width - 7*dayWidth)/2;
-        NSDateComponents * comps = [_calendar components:NSCalendarUnitDay fromDate:[NSDate date]];
-        //NSCalendar *c = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
-        NSCalendar* c =[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
-        [c setLocale:[NSLocale currentLocale]];
-
-        [comps setDay:[c firstWeekday]-1];
+        NSDateComponents *comps = [_calendar components:NSCalendarUnitYear | NSCalendarUnitMonth fromDate:[NSDate date]];
+        comps.weekday = 1;
+        comps.weekdayOrdinal = 1;
+        
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
         [offsetComponents setDay:1];
